@@ -9,4 +9,4 @@ lang = "ru"
 session_id = "mySessionID1"
 
 #db
-db_path ="C:/Users/admin/Desktop/diploma/longpoll/db.sqlite3"
+db_path ="./db.sqlite3"
