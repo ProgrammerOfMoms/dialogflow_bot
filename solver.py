@@ -243,6 +243,23 @@ class Solver:
         elif payload["command"] == "direction.cancel":
             self.__clear_contex(contex, "ALL") 
             return "Готово", DEFAULT_PARAMS
+        
+        elif payload["command"] == "feedback.positive":
+            text = "Спасибо за отзыв!"
+            return text, DEFAULT_PARAMS
+
+        elif payload["command"] == "feedback.negative":
+            text = "Мне очень жаль. Расскажи, пожалуйста, подробнее, что пошло не так."
+            #db layer
+            return text, DEFAULT_PARAMS
+    
+    def action_solver(self, action, peer_id):
+        if action == SMALLTALK_BYE:
+            text = "Скажи, пожалуйста, я был полезен?"
+            p = {"keyboard": json.dumps(KEYBOARDS["feedback"])}
+            return text, p
+        else:
+            return False, False
 
 
 

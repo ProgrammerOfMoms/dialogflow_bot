@@ -5,3 +5,6 @@ DIRECTION_GET_BY_SPHERES    = "direction.getBySpheres"
 DIRECTION_GET_SUBJECTS      = "direction.getSubjects"
 
 FACULTY_GET  = "faculty.get"
+
+
+SMALLTALK_BYE = "smalltalk.greetings.bye"

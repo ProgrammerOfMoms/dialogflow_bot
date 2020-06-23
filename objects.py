@@ -78,8 +78,34 @@ DIRECTION_BY_SPHERES_KEYBOARD = {
  ]
 }
 
+FEEDBACK_KEYBOARD = {
+    "one_time": False,
+    "inline": True,
+    "buttons": [
+    [
+     {
+        "action": {
+            "type": "text",
+            "label": "Да",
+            "payload": json.dumps({"command":"feedback.positive"})
+        },
+        "color": "positive"
+     },
+     {
+        "action": {
+            "type": "text",
+            "label": "Нет",
+            "payload": json.dumps({"command":"feedback.negative"})
+        },
+        "color": "negative"
+     }
+    ]
+ ]
+}
+
 KEYBOARDS = {
     "default": DEFAULT_KEYBOARD,
     "direction_by_subjects": DIRECTION_BY_SUBJECTS_KEYBOARD,
-    "direction_by_spheres": DIRECTION_BY_SPHERES_KEYBOARD
+    "direction_by_spheres": DIRECTION_BY_SPHERES_KEYBOARD,
+    "feedback": FEEDBACK_KEYBOARD
 }

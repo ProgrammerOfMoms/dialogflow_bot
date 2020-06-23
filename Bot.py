@@ -16,10 +16,14 @@ class Bot:
         except:
             intent = ""
             parameters = {}
+        try:
+            action = response['result']['action']
+        except:
+            action = ""
         response = response['result']['fulfillment']['messages']
         needToSay = ""
         for item in response:
             needToSay += f"{item['speech']}\n"
-        return needToSay, intent, parameters
+        return needToSay, intent, parameters, action
 
     

@@ -67,22 +67,30 @@ class Server:
                         #get dialogflow bot instanse
                         bot = Bot(ai_token, lang, session_id)
                         #get text, resolved intent and msg params 
-                        text, intent, params = bot.send_msg(event.object.text)
+                        text, intent, params, action = bot.send_msg(event.object.text)
                         #processing 
                         resolve, p = solver.run(intent, params, event.object.peer_id)
                         # print(f"Интент: {intent}")
                         if resolve:
                             self.send_msg(event.object.peer_id, resolve, **p)
+                            if action:
+                                resolve, p = solver.action_solver(action, event.object.peer_id)
+                                if resolve and p:
+                                    self.send_msg(event.object.peer_id, resolve, **p)
+
                         else: 
                             prefix = solver.set_prefix(intent, params)
                             postfix = solver.set_postfix(intent, params)
                             text = f'{prefix}{text}{postfix}' 
                             self.send_msg(event.object.peer_id, text)
+                            if action:
+                                resolve, p = solver.action_solver(action, event.object.peer_id)
+                                if resolve and p:
+                                    self.send_msg(event.object.peer_id, resolve, **p)
                     else:
                         resolve, p = solver.resolve_payload(payload, event.object.peer_id)
                         self.send_msg(event.object.peer_id, resolve, **p)
         except:
             if not self.db.is_closed:
                 self.db.close()
-            raise
             exit()
